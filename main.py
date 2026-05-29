@@ -7,12 +7,12 @@ def main() -> None:
 	The function takes user input for table setup,
 	loads a list of names from a .txt file, 
 	organizes them into available seats,
-	and displays the result and store it in a .txt file.
+	and displays the result and store it in a .csv file.
 
 	Return: None.
 	"""
 	input_file = "./new_colleagues.txt"
-	output_file = "openspace_plan.txt"
+	output_file = "openspace_plan.csv"
 	# Loop that waits for valid user input. Default configuration is 6 tables of 4 seats each.
 	while True:
 		launch_setup = str(input("Enter 'd' for a default configuration, 'c' for custom: "))
@@ -25,16 +25,16 @@ def main() -> None:
 			table_capacity = int(input("Please enter the number of seats per table (int only): "))
 			break
 		else:
-			print("Please enter 'D' or 'C'.")
+			print("Please enter 'd' or 'c'.")
 	openspace = Openspace(table_number, table_capacity) # Creates an Openspace object.
 	colleagues = load_colleagues(input_file) # Loads the file with names to place.
 	try: # Tries to place everyone. Ends the program if there are not enough seats.
 		openspace.organize(colleagues)
 	except ValueError as error:
-		try:
-			with open("openspace_plan.txt", "r+") as file:
-				file.write("")
-		except FileNotFoundError:
+		try: # If output_file already exists, its content is wiped.
+			with open(output_file, "r+") as file:
+				file.truncate()
+		except FileNotFoundError: # If output_file does not exist, skip.
 			pass
 		print(f"Error: {error}")
 		return

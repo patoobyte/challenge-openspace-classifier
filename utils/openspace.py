@@ -1,4 +1,5 @@
 import random
+import csv
 from utils.table import Table
 
 class Openspace:
@@ -9,10 +10,12 @@ class Openspace:
 		number_of_tables: (int) number of tables in the openspace.
 		table_capacity: (int) number of seats in one table.
 		tables: (list) list of tables in the openspace.
+		plan: (list) sitting plan of the openspace
 	"""
 	number_of_tables: int
 	table_capacity: int
 	tables: list
+	plan: list
 
 	def __init__(self, number_of_tables, table_capacity) -> None:
 		"""
@@ -32,6 +35,8 @@ class Openspace:
 			table_number = i + 1 # Add 1 to table_number so numbering starts at 1.
 			table = Table(table_capacity, table_number)
 			self.tables.append(table)
+		# Creates a list to store sitting plan
+		self.plan = []
 
 	def organize(self, colleagues: list) -> None:
 		"""
@@ -49,12 +54,27 @@ class Openspace:
 			raise ValueError("Not enough seats.")
 		# Shuffles the name list
 		random.shuffle(colleagues)
+		# Sits everyone. 
 		# For each name, find a table with a free spot, then assign a free seat from that table.
 		for name in colleagues:
 			for table in self.tables:
 				if table.has_free_spot() == True:
 					table.assign_seat(name)
 					break
+		# Write the sitting plan into self.plan.
+		# For each table, stores its sitting plan in a list.
+		for table in self.tables:
+			table_plan = []
+			for seat in table.seats:
+				if seat.free == False:
+					table_plan.append(seat.occupant)
+				else:
+					table_plan.append("None")
+			# Appends the table plan to the openspace plan, preceeded by the table number.
+			self.plan.append({
+				"table_number": table.table_number,
+				"table_plan": table_plan
+			})
 
 	def display(self) -> None:
 		"""
@@ -67,15 +87,15 @@ class Openspace:
 		# Prints openspace configuration.
 		print(f"Sitting plan for {len(self.colleagues)} people on {self.number_of_tables} tables of {self.table_capacity}.\n")
 		# Loops the tables.
-		for table in self.tables:
+		for table in self.plan:
 			# Prints the table number and a separator.
-			print(f"Table #{table.table_number}")
+			print(f"Table #{table["table_number"]}")
 			print("--------")
-			# Loops through the seats of the table.
-			for seat_number, seat in enumerate(table.seats, start=1):
-				# If the seat is occupied, prints the occupant's name, else prints "Empty seat".
-				if seat.free is False:
-					print(f"Seat {seat_number}: {seat.occupant}")
+			# Loops through the table_plan.
+			for seat_number, occupant in enumerate(table["table_plan"], start=1):
+				# If there is an occupant, prints the seat number and the name.
+				if occupant != "None":
+					print(f"Seat {seat_number}: {occupant}")
 				else:
 					print("Empty seat.")
 			print()
@@ -90,16 +110,16 @@ class Openspace:
 			None.
 		"""
 		# Write on the file the openspace configuration followed by the sitting plan.
-		with open(filename, "w") as file:
-			file.write(f"Sitting plan for {len(self.colleagues)} people on {self.number_of_tables} tables of {self.table_capacity}.\n")
-			for table in self.tables:
-				file.write(f"\nTable #{table.table_number}\n")
-				file.write("--------\n")
-				for seat_number, seat in enumerate(table.seats, start=1):
-					if seat.free is False:
-						file.write(f"Seat {seat_number}: {seat.occupant}\n")
-					else:
-						file.write(f"Seat {seat_number}: Empty seat.\n")
+		with open(filename, "w", newline="", encoding="utf-8") as file:
+			writer = csv.writer(file)
+			writer.writerow(["table_number", "seat_number", "occupant"])
+			for table in self.plan:
+				for i, occupant in enumerate(table["table_plan"], start=1):
+					writer.writerow([
+						table["table_number"],
+						i,
+						occupant if occupant != "None" else "Empty"
+						])
 
 	def __str__(self):
 		""" 
