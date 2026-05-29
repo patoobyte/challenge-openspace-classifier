@@ -1,7 +1,7 @@
 # Openspace Organizer 🚀
 
-Built with  
-<img src="https://www.python.org/static/community_logos/python-logo.png" alt="Python logo" style="width:30%; height:auto;">
+🧰 Built with  
+<img src="https://www.python.org/static/community_logos/python-logo.png" alt="Python logo" style="width:20%; height:auto;">
 
 ---
 
@@ -23,7 +23,7 @@ A simple script that takes a list of names and randomly assigns seats in an open
 └── notebook_guide.ipynb
 ```
 
-## 💻 Installation & Usage 🖱️
+## 💻 Installation & Usage 🔨
 
 1. Clone the repository to your local machine.
 
