@@ -20,7 +20,8 @@ A simple script that takes a list of names and randomly assigns seats in an open
 ├── README.md
 ├── main.py
 ├── new_colleagues.txt
-└── notebook_guide.ipynb
+├── notebook_guide.ipynb
+└── .gitignore
 ```
 
 ## 💻 Installation & Usage 🔨
