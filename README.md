@@ -1,15 +1,15 @@
-# Openspace Organizer
+# Openspace Organizer 🚀
 
 Built with  
-<img src="https://www.python.org/static/community_logos/python-logo.png" alt="Python logo" style="width:50%; height:auto;">
+<img src="https://www.python.org/static/community_logos/python-logo.png" alt="Python logo" style="width:30%; height:auto;">
 
 ---
 
-## Description
+## ✨ Description ✨
 
 A simple script that takes a list of names and randomly assigns seats in an openspace setting.
 
-## Structure
+## 🗃️ Structure 🗃️
 
 ```
 .
@@ -23,7 +23,7 @@ A simple script that takes a list of names and randomly assigns seats in an open
 └── README.md
 ```
 
-## Installation & Usage
+## 💻 Installation & Usage 🖱️
 
 1. Clone the repository to your local machine.
 
@@ -44,10 +44,10 @@ python3 main.py
 	- Stores the seat arrangement in a .csv file.
 
 
-## Timeline
+## 🏃 Timeline 🏃
 
 The project was completed over 2 days.
 
-## Personal Situation 
+## 🐈‍⬛ Personal Situation 🐈‍⬛
 
 The project was done as part of the AI & Data Science bootcamp at BeCode.org.
