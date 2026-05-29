@@ -17,10 +17,10 @@ A simple script that takes a list of names and randomly assigns seats in an open
 │   ├── file_utils.py
 │   ├── openspace.py
 │   └── table.py
+├── README.md
 ├── main.py
 ├── new_colleagues.txt
-├── notebook_guide.ipynb
-└── README.md
+└── notebook_guide.ipynb
 ```
 
 ## 💻 Installation & Usage 🖱️
