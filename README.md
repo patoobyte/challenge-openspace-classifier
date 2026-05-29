@@ -38,6 +38,9 @@ python3 main.py
 
 3. The script:  
 	- Reads the input file (*new_colleagues.txt*)
+ 	- Asks for user input for table configuration:
+  		- Enter 'd' for default configuration of 6 tables of 4 seats.
+    	- Enter 'c' to enter a custom configuration. 
 	- Randomly assigns seats to everyone  
 		- If there are not enough seats, the script will end.
 	- Displays the seat arrangement on the console
